@@ -89,56 +89,38 @@ useReveal(root);
             <span class="heart-text" aria-hidden="true">♡</span>
           </h2>
           <p class="professional-role">{{ c.about.role }}</p>
-          <p v-for="p in c.about.paragraphs" :key="p">{{ p }}</p>
+          <p class="about-intro">
+            Um atendimento pensado em você. Do formato ao acabamento, cada
+            escolha traduz o seu estilo.
+          </p>
+          <details class="about-story">
+            <summary>Conheça minha proposta <Icon name="chevron" /></summary>
+            <p v-for="p in c.about.paragraphs" :key="p">{{ p }}</p>
+            <p v-for="feature in c.features" :key="feature.title">
+              <strong>{{ feature.title }}.</strong> {{ feature.text }}
+            </p>
+          </details>
           <ul class="about-points">
             <li v-for="point in c.about.points" :key="point">
               <Icon name="check" />{{ point }}
             </li>
           </ul>
           <button class="button" @click="open()">
-            Fale com nossa especialista <Icon name="arrow" />
+            Vamos conversar <Icon name="arrow" />
           </button>
         </div>
       </section>
       <ServicesSection /><GallerySection /><ComparisonSection /><PromotionsSection /><ReviewsSection />
-      <section class="experience-section">
-        <div class="wrap">
-          <div class="section-heading" data-reveal>
-            <p class="eyebrow">A EXPERIÊNCIA LUNA NAILS</p>
-            <h2>O luxo está no cuidado.</h2>
-            <p>Uma proposta de atendimento que começa em você.</p>
-          </div>
-          <div class="experience-grid">
-            <article
-              v-for="feature in c.features"
-              :key="feature.title"
-              data-reveal
-            >
-              <Icon :name="feature.icon" />
-              <h3>{{ feature.title }}</h3>
-              <p>{{ feature.text }}</p>
-            </article>
-          </div>
-        </div>
-      </section>
       <FaqSection />
-      <section class="booking-banner wrap" data-reveal>
-        <img
-          src="/media/nude.webp"
-          alt=""
-          width="640"
-          height="640"
-          loading="lazy"
-        />
+      <section class="bio-discovery wrap">
         <div>
-          <p class="eyebrow">RESERVE UM MOMENTO PARA VOCÊ</p>
-          <h2>Pronta para realçar<br />a sua beleza?</h2>
-          <p>Escolha seu procedimento e converse com o estúdio.</p>
-          <button class="button cream" @click="open()">
-            <Icon name="whatsapp" /> Agendar pelo WhatsApp
-          </button>
+          <p class="eyebrow">O STUDIO, A UM TOQUE</p>
+          <h2>Seu atalho para o autocuidado.</h2>
+          <p>Serviços, inspirações e agendamento em um só lugar.</p>
         </div>
-        <Icon name="flower" />
+        <RouterLink to="/links" class="button"
+          >Conhecer a Link na Bio <Icon name="arrow"
+        /></RouterLink>
       </section>
       <ContactSection />
     </main>

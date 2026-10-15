@@ -79,6 +79,12 @@ try {
     const file = route === "/" ? "dist/index.html" : "dist/links/index.html";
     if (route !== "/") await mkdir("dist/links", { recursive: true });
     await writeFile(file, html);
+    if (route === "/links") {
+      await writeFile("dist/links.html", html);
+      await writeFile("dist/linkbio.html", html);
+      await mkdir("dist/linkbio", { recursive: true });
+      await writeFile("dist/linkbio/index.html", html);
+    }
   }
   await writeFile(
     "dist/robots.txt",

@@ -3,6 +3,9 @@ import { computed, ref, watch } from "vue";
 import { siteConfig as c, media } from "../config/siteConfig";
 import Modal from "./Modal.vue";
 import Icon from "./Icon.vue";
+import PaginationNav from "./PaginationNav.vue";
+const page = ref(0),
+  pageSize = 4;
 const category = ref("Todos"),
   index = ref(-1),
   start = ref(0);
@@ -13,7 +16,13 @@ const filtered = computed(() =>
   ),
 );
 const active = computed(() => filtered.value[index.value]);
-watch(category, () => (index.value = -1));
+const visible = computed(() =>
+  filtered.value.slice(page.value * pageSize, (page.value + 1) * pageSize),
+);
+watch(category, () => {
+  index.value = -1;
+  page.value = 0;
+});
 function move(n) {
   index.value =
     (index.value + n + filtered.value.length) % filtered.value.length;
@@ -32,8 +41,7 @@ function swipe(event) {
         <p>Encontre referências para o seu próximo estilo.</p>
       </div>
       <p class="demo-note" v-if="c.demo">
-        Fotografias geradas para demonstração · substitua pelos trabalhos reais
-        do estúdio.
+        Referências visuais geradas · portfólio demonstrativo
       </p>
       <div class="filters" aria-label="Filtrar portfólio">
         <button
@@ -48,12 +56,12 @@ function swipe(event) {
       <p class="sr-only" role="status">
         {{ filtered.length }} imagens na galeria
       </p>
-      <TransitionGroup name="cards" tag="div" class="gallery-grid"
-        ><button
-          v-for="(photo, i) in filtered"
+      <div class="gallery-grid">
+        <button
+          v-for="(photo, i) in visible"
           :key="photo.id"
           class="gallery-item"
-          @click="index = i"
+          @click="index = page * pageSize + i"
           :aria-label="`Ampliar ${photo.caption}`"
         >
           <img
@@ -63,20 +71,28 @@ function swipe(event) {
             height="640"
             loading="lazy"
             decoding="async"
-          /><span>{{ photo.caption }}<Icon name="arrow" /></span></button
-      ></TransitionGroup>
+          /><span>{{ photo.caption }}<Icon name="arrow" /></span>
+        </button>
+      </div>
+      <PaginationNav
+        v-model:page="page"
+        :total="filtered.length"
+        :size="pageSize"
+        label="Portfólio"
+      />
     </div>
     <Modal
       :open="index >= 0"
       label="Fotografia ampliada do portfólio"
+      variant="lightbox"
+      @keydown.left.prevent="move(-1)"
+      @keydown.right.prevent="move(1)"
       @close="index = -1"
       ><div
         class="lightbox"
         tabindex="0"
         autofocus
         v-if="active"
-        @keydown.left.prevent="move(-1)"
-        @keydown.right.prevent="move(1)"
         @touchstart.passive="start = $event.touches[0].clientX"
         @touchend="swipe"
       >

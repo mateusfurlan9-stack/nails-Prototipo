@@ -1,4 +1,14 @@
-# Análise do original e validação da entrega
+# Análise e validação — revisão 1.1
+
+## Correções desta revisão
+
+A implementação anterior empilhava os nove serviços, repetia a área de diferenciais e tornava a Link na Bio pouco visível. A revisão usa catálogo paginado (3 por página no desktop, 2 no celular), galeria paginada (4), slider de ofertas no celular e abas na bio. A história completa é expansível; a imagem de apresentação e o hero ocupam menos altura nas telas estreitas.
+
+Também foram corrigidos pontos de estabilidade: normalização de hashes antigos antes da criação do router, espera da rota inicial antes de montar o aplicativo, aliases de URL para a bio, arquivos HTML físicos para acesso direto, fechamento nativo do dialog antes da desmontagem e controle de rolagem compartilhada. A barra de fechar permanece visível ao rolar o conteúdo do modal.
+
+Foram adicionados testes para paginação e reinício de filtros, índice de fotografia após trocar a página, abas por teclado, atalho da bio no cabeçalho, liberação da rolagem ao desmontar o menu, seis formas de abrir a bio e avanço/retorno do slider de ofertas. O conjunto totaliza 35 testes (6 regras + 29 componentes/rotas).
+
+A verificação visual em navegador continua indisponível neste ambiente. Os testes de componentes validam DOM, navegação e estado; não comprovam medidas de tela, acabamento visual ou gestos nativos. Nenhuma nota Lighthouse foi medida nesta revisão.
 
 ## Projeto recebido
 

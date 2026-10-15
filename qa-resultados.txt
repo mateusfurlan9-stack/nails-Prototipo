@@ -1,19 +1,19 @@
-Validação final — Luna Nails
-Data: 2026-10-14
-Ambiente: Node.js 24.19.0 / npm 11.9.0
+Luna Nails — revisão 1.1
+Validação final: 2026-10-15 UTC
+Node.js 24.19.0
 
 $ npm test
 npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
 
-> luna-nails-studio@1.0.0 test
+> luna-nails-studio@1.1.0 test
 > node --test tests/*.test.mjs && vitest run
 
-✔ descontos e economia em todos os serviços e combos (0.88499ms)
-✔ WhatsApp sem destinatário válido não cria link (0.242064ms)
-✔ WhatsApp codifica nome, preço e preferências (14.06702ms)
-✔ solicitação sem procedimento não promete disponibilidade (0.264578ms)
-✔ data local e moeda brasileira (0.427292ms)
-✔ configuração mantém demonstração e contatos sem dados fictícios (0.118058ms)
+✔ descontos e economia em todos os serviços e combos (0.998741ms)
+✔ WhatsApp sem destinatário válido não cria link (0.18601ms)
+✔ WhatsApp codifica nome, preço e preferências (12.132232ms)
+✔ solicitação sem procedimento não promete disponibilidade (0.137988ms)
+✔ data local e moeda brasileira (0.368024ms)
+✔ configuração mantém demonstração e contatos sem dados fictícios (0.110656ms)
 ℹ tests 6
 ℹ suites 0
 ℹ pass 6
@@ -21,59 +21,60 @@ npm warn Unknown env config "http-proxy". This will stop working in the next maj
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 99.145097
+ℹ duration_ms 91.252889
 
  RUN  v5.0.4 /workspace/scratch/58bb15f27381/nail-studio
 
 
  Test Files  1 passed (1)
-      Tests  16 passed (16)
-   Start at  18:45:53
-   Duration  1.36s (tests 35%, environment 34%, transform 24%, import 6%, setup 1%)
+      Tests  29 passed (29)
+   Start at  19:18:18
+   Duration  1.34s (tests 50%, environment 36%, transform 8%, import 5%, setup 1%)
 
 
 
 $ npm run build
 npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
 
-> luna-nails-studio@1.0.0 build
+> luna-nails-studio@1.1.0 build
 > vite build && node scripts/seo.mjs
 
 vite v8.3.4 building client environment for production...
 transforming...
-✓ 51 modules transformed.
+✓ 53 modules transformed.
 rendering chunks...
 computing gzip size...
-dist/index.html                                                   1.20 kB │ gzip:  0.56 kB
-dist/assets/dm-sans-latin-400-normal-CW0RaeGs.woff2              14.20 kB
-dist/assets/dm-sans-latin-500-normal-B9HHJjqV.woff2              14.30 kB
-dist/assets/dm-sans-latin-400-normal-BwCSEQnW.woff               18.35 kB
-dist/assets/dm-sans-latin-500-normal-Dr3UlScf.woff               18.52 kB
-dist/assets/cormorant-garamond-latin-400-normal-B-1hWBU7.woff2   22.87 kB
-dist/assets/cormorant-garamond-latin-500-normal-BsRWmXhO.woff2   23.31 kB
-dist/assets/cormorant-garamond-latin-400-italic-Dc_OZ8oc.woff2   23.66 kB
-dist/assets/cormorant-garamond-latin-400-normal-B7YtguxJ.woff    30.98 kB
-dist/assets/cormorant-garamond-latin-500-normal-zIXX3Q-H.woff    31.37 kB
-dist/assets/cormorant-garamond-latin-400-italic-BLh7T8o8.woff    32.88 kB
-dist/assets/index-C2gmlDE9.css                                   36.88 kB │ gzip:  8.49 kB
-dist/assets/NotFound-DSCz4zZ0.js                                  0.58 kB │ gzip:  0.42 kB
-dist/assets/ServiceCard-BInVrK33.js                               2.07 kB │ gzip:  1.01 kB
-dist/assets/LinksPage-d3OgUeBp.js                                 5.75 kB │ gzip:  2.50 kB
-dist/assets/HomePage-CABxZBV4.js                                 21.30 kB │ gzip:  7.43 kB
-dist/assets/index-ygxiUKHP.js                                   129.42 kB │ gzip: 50.17 kB
+dist/index.html                                                  1.29 kB │ gzip:  0.60 kB
+dist/assets/dm-sans-latin-400-normal-CW0RaeGs.woff2             14.20 kB
+dist/assets/dm-sans-latin-500-normal-B9HHJjqV.woff2             14.30 kB
+dist/assets/dm-sans-latin-400-normal-BwCSEQnW.woff              18.35 kB
+dist/assets/dm-sans-latin-500-normal-Dr3UlScf.woff              18.52 kB
+dist/assets/cormorant-garamond-latin-400-normal-B-1hWBU7.woff2  22.87 kB
+dist/assets/cormorant-garamond-latin-500-normal-BsRWmXhO.woff2  23.31 kB
+dist/assets/cormorant-garamond-latin-400-italic-Dc_OZ8oc.woff2  23.66 kB
+dist/assets/cormorant-garamond-latin-400-normal-B7YtguxJ.woff   30.98 kB
+dist/assets/cormorant-garamond-latin-500-normal-zIXX3Q-H.woff   31.37 kB
+dist/assets/cormorant-garamond-latin-400-italic-BLh7T8o8.woff   32.88 kB
+dist/assets/index-P4MbQKfr.css                                  47.63 kB │ gzip: 10.22 kB
+dist/assets/NotFound-Cac4qcHq.js                                 0.60 kB │ gzip:  0.43 kB
+dist/assets/ServiceCard-O4bXAWgV.js                              1.97 kB │ gzip:  1.00 kB
+dist/assets/LinksPage-C8IjJfxV.js                                7.24 kB │ gzip:  2.94 kB
+dist/assets/HomePage-Cvq9l6wr.js                                24.34 kB │ gzip:  8.36 kB
+dist/assets/index-Cw5gc7bz.js                                   63.82 kB │ gzip: 25.16 kB
+dist/assets/runtime-core.esm-bundler-Bk_djoYg.js                64.33 kB │ gzip: 25.27 kB
 
-✓ built in 205ms
+✓ built in 215ms
 Pré-renderização concluída: / e /links. SEO público: false
 
 
 $ npm run check
 npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
 
-> luna-nails-studio@1.0.0 check
+> luna-nails-studio@1.1.0 check
 > node scripts/check.mjs
 
 OK: 6 mídias locais, 2 páginas pré-renderizadas, 9 seções, metadados e chunks de rotas.
+OK: bio em arquivos independentes, abas acessíveis, atalho visível e catálogo compacto.
 
 
-npm audit executado antes da formatação: 0 vulnerabilidades reportadas.
-Navegador real, Lighthouse e integrações externas não executados; veja ANALISE-E-VALIDACAO.md.
+Navegador real e Lighthouse não disponíveis. A validação em jsdom não mede layout ou gestos nativos.

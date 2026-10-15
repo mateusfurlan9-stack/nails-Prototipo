@@ -2,6 +2,20 @@
 
 Projeto completo em Vue 3, reconstruído a partir do ZIP fornecido. A direção visual segue a referência enviada: creme, rosé, fotografia em destaque, títulos editoriais e uma Link na Bio própria. **Luna Nails e Luna são identidades demonstrativas editáveis.**
 
+## Revisão 1.1 — navegação compacta
+
+- Link na Bio agora aparece diretamente no cabeçalho, no menu e em um destaque na Home.
+- A bio abre por `/links`, `/linkbio`, `/bio`, `/links.html` e `/linkbio.html`. O build inclui também os arquivos HTML e as pastas independentes da bio.
+- Catálogo com três serviços por página no desktop e dois no celular, busca sem acentos e reinício de página ao trocar o filtro. No celular, os cards são horizontais e compactos; o botão Escolher mostra detalhes no agendamento.
+- Galeria com quatro fotos por página, lightbox e navegação pelo conjunto completo.
+- Ofertas em slider no celular, com deslize, setas, posição e navegação por teclado. Depoimentos continuam deslizáveis.
+- Bio com abas Serviços, Portfólio, Ofertas e Avaliações, incluindo teclado e um único painel visível por vez.
+- Apresentação curta e história expansível. Blocos redundantes foram retirados, mantendo as informações acessíveis.
+- CSS reorganizado, imagens e espaçamentos menores no mobile, menu de tela inteira e barra de fechar fixa dentro dos diálogos.
+- Fechar ou desmontar uma janela libera a rolagem. A inicialização espera a rota antes de montar o aplicativo, preservando o HTML enquanto o código carrega.
+
+**Para atualizar uma publicação existente:** substitua o projeto anterior completo por esta versão e faça um novo deploy. Não misture os arquivos `dist/assets` de builds diferentes. Depois do deploy, abra `/links` diretamente e atualize a página para conferir o roteamento.
+
 ## Começar
 
 Instale Node.js 22.12+ ou Node.js 24 LTS e abra um terminal nesta pasta:

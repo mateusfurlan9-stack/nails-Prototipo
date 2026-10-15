@@ -51,3 +51,7 @@ O logo tipográfico é local e não depende de uma imagem externa. Para usar seu
 Enquanto `demo: true` ou sem domínio em `seo.url`, o build usa `noindex, nofollow`, `robots.txt` com bloqueio e sitemap vazio. Isso é intencional. Em modo público com domínio real, gera canonical, Open Graph, sitemap e dados `NailSalon`, sem nota agregada ou credenciais fictícias. O build exige telefone e endereço antes de ativar SEO público.
 
 As fontes são hospedadas localmente. As únicas integrações externas potenciais são os canais configurados, o mapa sob demanda e o VLibras quando ativado. A leitura em voz alta depende das vozes disponíveis no navegador/sistema. Avalie os avisos de privacidade necessários conforme os serviços que você efetivamente configurar.
+
+## Link na Bio e organização compacta
+
+A bio usa os mesmos dados de configuração e agrupa o conteúdo em quatro abas. O botão do cabeçalho aponta para `/links`; `/linkbio` e as versões `.html` também são aceitas. Serviços e galeria usam paginação para evitar listas verticais extensas. Ofertas usam scroll-snap no celular, sem avanço automático. Descrições completas de serviços permanecem na janela de agendamento.

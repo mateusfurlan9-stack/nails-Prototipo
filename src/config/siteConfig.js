@@ -35,9 +35,9 @@ export const siteConfig = {
   },
   hero: {
     eyebrow: "BELEZA · AUTOCUIDADO · CONFIANÇA",
-    title: "Suas unhas merecem uma experiência extraordinária.",
+    title: "Sua essência, em cada detalhe.",
     description:
-      "Mais do que estética, um momento só seu. Unhas que acompanham seu estilo, com atenção e carinho em cada detalhe.",
+      "Unhas que traduzem seu estilo. Um momento de beleza pensado para você.",
     image: "/media/nude.webp",
     alt: "Fotografia gerada: mãos com unhas amendoadas em rosa nude",
   },

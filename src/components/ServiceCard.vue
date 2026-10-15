@@ -12,36 +12,36 @@ const { open } = useBooking();
       <img
         :src="media(item.image)"
         :srcset="`/media/${item.image}-thumb.webp 256w, ${media(item.image)} 504w`"
-        :sizes="
-          compact
-            ? '(max-width: 360px) 120px, 170px'
-            : '(max-width: 360px) 90vw, (max-width: 950px) 45vw, 390px'
-        "
+        sizes="(max-width: 650px) 96px, (max-width: 950px) 30vw, 360px"
         :alt="item.alt || `${item.name}, foto ilustrativa`"
-        width="640"
-        height="640"
+        width="504"
+        height="504"
         loading="lazy"
         decoding="async"
       /><span v-if="discount(item)" class="badge"
-        >−{{ discount(item) }}% <span v-if="c.demo">demo</span></span
+        >−{{ discount(item) }}%<span v-if="c.demo"> demo</span></span
       >
     </div>
     <div class="service-content">
-      <p v-if="!compact" class="category">{{ item.category }}</p>
+      <p class="category">{{ item.category || "SEU MOMENTO" }}</p>
       <h3>{{ item.name }}</h3>
-      <p v-if="!compact">{{ item.description }}</p>
-      <div v-if="item.duration && !compact" class="duration">
-        <Icon name="clock" /> {{ item.duration }} min <span>· estimativa</span>
+      <p class="service-description">{{ item.description }}</p>
+      <div v-if="item.duration" class="duration">
+        <Icon name="clock" />{{ item.duration }} min · estimativa
       </div>
-      <p class="prices">
-        <del v-if="discount(item)">{{ money(item.original) }}</del
-        ><strong>{{ money(item.price) }}</strong>
-      </p>
-      <small v-if="c.demo" class="demo-price">Valores demonstrativos</small
-      ><button class="button full small" @click="open(item)">
-        <Icon name="calendar" />
-        {{ compact ? "Escolher" : "Agendar este serviço" }}
-      </button>
+      <div class="service-bottom">
+        <p class="prices">
+          <del v-if="discount(item)">{{ money(item.original) }}</del
+          ><strong>{{ money(item.price) }}</strong>
+        </p>
+        <button
+          class="button small"
+          @click="open(item)"
+          :aria-label="`Ver detalhes e agendar ${item.name}`"
+        >
+          Escolher <Icon name="arrow" />
+        </button>
+      </div>
     </div>
   </article>
 </template>

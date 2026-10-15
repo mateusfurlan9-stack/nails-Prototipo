@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, nextTick } from "vue";
 import Brand from "./Brand.vue";
 import Icon from "./Icon.vue";
 import Modal from "./Modal.vue";
@@ -16,6 +16,11 @@ const links = [
   ["Avaliações", "avaliacoes"],
   ["Contato", "contato"],
 ];
+async function book() {
+  menu.value = false;
+  await nextTick();
+  open();
+}
 </script>
 <template>
   <header class="site-header">
@@ -31,8 +36,10 @@ const links = [
           name
         }}</RouterLink>
       </nav>
-      <button class="button header-book" @click="open()">
-        <Icon name="calendar" /> Agendar agora <Icon name="chevron" /></button
+      <RouterLink to="/links" class="bio-shortcut"
+        >Link na Bio <Icon name="arrow" /></RouterLink
+      ><button class="button header-book" @click="open()">
+        <Icon name="calendar" /> Agendar</button
       ><button
         class="icon-button menu-toggle"
         aria-label="Abrir menu"
@@ -43,10 +50,13 @@ const links = [
       </button>
     </div>
   </header>
-  <Modal :open="menu" label="Menu principal" @close="menu = false"
+  <Modal
+    :open="menu"
+    label="Menu principal"
+    variant="menu"
+    @close="menu = false"
     ><div class="mobile-menu">
       <Brand />
-      <p class="eyebrow">SEU PRÓXIMO MOMENTO DE BELEZA</p>
       <nav aria-label="Navegação mobile">
         <RouterLink
           v-for="([name, id], i) in links"
@@ -54,20 +64,14 @@ const links = [
           :to="`/#${id}`"
           @click="menu = false"
           ><small>0{{ i + 1 }}</small
-          >{{ name }}<Icon name="arrow"
+          >{{ name }}<Icon name="arrow" /></RouterLink
+        ><RouterLink to="/links" @click="menu = false"
+          ><small>08</small>Link na Bio<Icon name="arrow"
         /></RouterLink>
       </nav>
-      <button
-        class="button full"
-        @click="
-          menu = false;
-          open();
-        "
-      >
-        <Icon name="whatsapp" /> Agendar pelo WhatsApp</button
-      ><RouterLink to="/links" class="text-button" @click="menu = false"
-        >Conheça nossa Link na Bio</RouterLink
-      >
+      <button class="button full" @click="book">
+        <Icon name="whatsapp" /> Agendar meu momento
+      </button>
     </div></Modal
   >
 </template>

@@ -1,6 +1,6 @@
 import { vi } from "vitest";
-window.matchMedia = vi.fn(() => ({
-  matches: true,
+window.matchMedia = vi.fn((query) => ({
+  matches: query.includes("prefers-reduced-motion"),
   addEventListener: vi.fn(),
   removeEventListener: vi.fn(),
 }));

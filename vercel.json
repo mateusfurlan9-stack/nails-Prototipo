@@ -6,15 +6,23 @@
   "rewrites": [
     {
       "source": "/links",
-      "destination": "/links/index.html"
+      "destination": "/links.html"
+    },
+    {
+      "source": "/links/",
+      "destination": "/links.html"
     },
     {
       "source": "/linkbio",
-      "destination": "/links/index.html"
+      "destination": "/linkbio.html"
+    },
+    {
+      "source": "/linkbio/",
+      "destination": "/linkbio.html"
     },
     {
       "source": "/bio",
-      "destination": "/links/index.html"
+      "destination": "/links.html"
     },
     {
       "source": "/((?!assets/|media/|favicon.svg|robots.txt|sitemap.xml).*)",

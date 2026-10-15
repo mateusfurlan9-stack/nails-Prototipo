@@ -16,6 +16,7 @@ import ReviewsSection from "../src/components/ReviewsSection.vue";
 import { siteConfig as c } from "../src/config/siteConfig";
 import { useBooking } from "../src/composables/useBooking";
 import { createRouter, createMemoryHistory } from "vue-router";
+import { makeRouter } from "../src/router";
 let wrappers = [];
 const render = (component, options = {}) => {
   const w = mount(component, {
@@ -46,7 +47,7 @@ afterEach(async () => {
 describe("serviços e solicitação", () => {
   it("filtra por categoria e pesquisa sem resultados", async () => {
     const w = render(ServicesSection);
-    expect(w.findAll(".service-card")).toHaveLength(9);
+    expect(w.findAll(".service-card")).toHaveLength(3);
     const cat = w
       .findAll(".filters button")
       .find((b) => b.text() === "Alongamentos");
@@ -280,6 +281,119 @@ describe("recursos preservados", () => {
         value: old,
         configurable: true,
       });
+    }
+  });
+});
+
+describe("revisão mobile e navegação", () => {
+  it("catálogo mostra três serviços por página e reinicia ao filtrar", async () => {
+    const w = render(ServicesSection);
+    expect(w.findAll(".service-card")).toHaveLength(3);
+    expect(w.text()).toContain("Manicure tradicional");
+    await w.find('[aria-label="Serviços: próxima página"]').trigger("click");
+    expect(w.findAll(".service-card")).toHaveLength(3);
+    expect(w.text()).toContain("Alongamento em fibra");
+    expect(w.text()).not.toContain("Manicure tradicional");
+    await w
+      .findAll(".filters button")
+      .find((b) => b.text() === "Nail Art")
+      .trigger("click");
+    expect(w.findAll(".service-card")).toHaveLength(1);
+    expect(w.text()).toContain("Nail Art personalizada");
+    expect(w.find(".pagination").exists()).toBe(false);
+  });
+  it("galeria pagina sem perder o índice da fotografia ampliada", async () => {
+    const w = render(GallerySection);
+    expect(w.findAll(".gallery-item")).toHaveLength(4);
+    await w.find('[aria-label="Portfólio: próxima página"]').trigger("click");
+    expect(w.findAll(".gallery-item")).toHaveLength(3);
+    await w.find(".gallery-item").trigger("click");
+    await flushPromises();
+    expect(w.find(".lightbox-controls").text()).toContain("5 / 7");
+  });
+  it("bio usa abas com teclado e só um painel visível", async () => {
+    const w = render(LinksPage, { global: { plugins: [router()] } });
+    expect(w.find("#panel-servicos").isVisible()).toBe(true);
+    expect(w.find("#panel-portfolio").isVisible()).toBe(false);
+    await w.find("#tab-servicos").trigger("keydown", { key: "ArrowRight" });
+    expect(w.find("#tab-portfolio").attributes("aria-selected")).toBe("true");
+    expect(w.find("#panel-servicos").isVisible()).toBe(false);
+    expect(w.find("#panel-portfolio").isVisible()).toBe(true);
+    await w.find("#tab-portfolio").trigger("keydown", { key: "End" });
+    expect(w.find("#panel-avaliacoes").isVisible()).toBe(true);
+  });
+  it("cabeçalho tem Link na Bio visível fora do menu", () => {
+    const w = render(HeaderNavigation, { global: { plugins: [router()] } });
+    expect(w.find(".header-inner .bio-shortcut").attributes("href")).toBe(
+      "/links",
+    );
+  });
+  it("fechar e desmontar menu libera rolagem do documento", async () => {
+    const w = render(HeaderNavigation, { global: { plugins: [router()] } });
+    await w.find(".menu-toggle").trigger("click");
+    await flushPromises();
+    expect(document.body.classList.contains("dialog-open")).toBe(true);
+    w.unmount();
+    expect(document.body.classList.contains("dialog-open")).toBe(false);
+  });
+  it.each([
+    "/links",
+    "/linkbio",
+    "/links/",
+    "/links.html",
+    "/linkbio.html",
+    "/links/index.html",
+  ])("rota direta %s abre a bio real", async (path) => {
+    const r = makeRouter(createMemoryHistory());
+    await r.push(path);
+    await r.isReady();
+    const w = render(
+      { template: "<RouterView />" },
+      { global: { plugins: [r] } },
+    );
+    await flushPromises();
+    expect(w.find("h1").text()).toBe("Luna Nails");
+    expect(w.find(".bio-book").exists()).toBe(true);
+  });
+});
+
+describe("slider de ofertas", () => {
+  it("avança, atualiza a posição e permite voltar", async () => {
+    const w = render(PromotionsSection);
+    expect(
+      w.find('[aria-label="Oferta anterior"]').attributes("disabled"),
+    ).toBeDefined();
+    await w.find('[aria-label="Próxima oferta"]').trigger("click");
+    expect(w.find(".promo-controls").text()).toContain("2 / 3");
+    expect(Element.prototype.scrollBy).toHaveBeenCalled();
+    await w.find('[aria-label="Oferta anterior"]').trigger("click");
+    expect(w.find(".promo-controls").text()).toContain("1 / 3");
+  });
+});
+
+describe("catálogo adaptável", () => {
+  it("usa dois cards no celular e reorganiza ao ampliar a tela", async () => {
+    const original = window.matchMedia;
+    let change;
+    const remove = vi.fn();
+    window.matchMedia = vi.fn(() => ({
+      matches: true,
+      addEventListener: (_, handler) => (change = handler),
+      removeEventListener: remove,
+    }));
+    try {
+      const w = render(ServicesSection);
+      expect(w.findAll(".service-card")).toHaveLength(2);
+      await w.find('[aria-label="Serviços: próxima página"]').trigger("click");
+      expect(w.text()).not.toContain("Manicure tradicional");
+      change({ matches: false });
+      await nextTick();
+      expect(w.findAll(".service-card")).toHaveLength(3);
+      expect(w.text()).toContain("Manicure tradicional");
+      w.unmount();
+      expect(remove).toHaveBeenCalledWith("change", change);
+    } finally {
+      window.matchMedia = original;
     }
   });
 });

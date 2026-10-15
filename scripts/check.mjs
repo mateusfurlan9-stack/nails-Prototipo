@@ -39,3 +39,20 @@ assert.ok(files.some((f) => f.startsWith("LinksPage-")));
 console.log(
   `OK: ${new Set(all).size} mídias locais, 2 páginas pré-renderizadas, 9 seções, metadados e chunks de rotas.`,
 );
+
+for (const path of [
+  "dist/links.html",
+  "dist/linkbio.html",
+  "dist/linkbio/index.html",
+]) {
+  const html = await readFile(path, "utf8");
+  assert.match(html, /bio-tabs/);
+  assert.match(html, /Agendar meu horário/);
+}
+const bioHtml = await readFile("dist/links.html", "utf8");
+assert.match(bioHtml, /role="tablist"/);
+assert.equal((home.match(/class="service-card"/g) || []).length, 3);
+assert.match(home, /bio-shortcut/);
+console.log(
+  "OK: bio em arquivos independentes, abas acessíveis, atalho visível e catálogo compacto.",
+);
