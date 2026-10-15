@@ -2,14 +2,14 @@
 export const siteConfig = {
   demo: true,
   brand: {
-    name: "Luna Nails",
+    name: "Esmalteria Elite Nails",
     subtitle: "Studio de Unhas",
     logo: "",
     professional: "Luna",
     tagline: "Beleza, cuidado e autoestima em cada detalhe.",
   },
   theme: {
-    primary: "#8B4E46",
+    primary: "#d15ab3",
     rose: "#D9B8AF",
     champagne: "#D5B88F",
     background: "#FAF7F4",
@@ -17,7 +17,7 @@ export const siteConfig = {
     ink: "#211D1C",
   },
   contact: {
-    whatsapp: "",
+    whatsapp: "5511974412934",
     instagram: "",
     tiktok: "",
     email: "",
@@ -29,7 +29,7 @@ export const siteConfig = {
   },
   seo: {
     url: "",
-    title: "Luna Nails | Studio de Unhas",
+    title: "Esmalteria Elite Nails",
     description:
       "Uma experiência de beleza, cuidado e nail design. Conheça nossos serviços e solicite seu agendamento.",
   },
@@ -42,9 +42,9 @@ export const siteConfig = {
     alt: "Fotografia gerada: mãos com unhas amendoadas em rosa nude",
   },
   about: {
-    title: "Muito prazer, eu sou a Luna.",
+    title: "Muito prazer, somos a Esmalteria Elite Nails.",
     role: "Nail Designer · apresentação demonstrativa",
-    photo: "/media/artist.webp",
+    photo: "/media/imagem1.jpeg",
     alt: "Retrato ilustrativo gerado de uma profissional em um estúdio de unhas",
     paragraphs: [
       "Minha proposta é valorizar sua beleza com uma escuta atenta e um atendimento pensado para você. Cada formato, cor e acabamento começa com uma conversa sobre o seu estilo.",
